@@ -159,7 +159,7 @@ plot(Avg_CPI_and_UN_lm)
 #find average cost of goods rise per year in cities that have not changed min wage vs cities that have
 time <- SCOPES_DATA$Time
 
-yearlyVec <- which(month(as.POSIXlt(time, format("%Y-%m-%d"))) == 5)
+yearlyVec <- which(month(as.POSIXlt(time, format("%Y-%m-%d"))) == 9)
 
 SCOPES_DATA_yearly <- SCOPES_DATA[yearlyVec,]
 
@@ -186,7 +186,7 @@ Houston_Avg_CPI_percent_increase <- mean(Houston_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, Houston_Avg_CPI_percent_increase)
 city <- c(city, "Houston")
 start_minWage <- c(start_minWage, Houston_Min[1])
-end_minWage <- c(end_minWage, Houston_Min[length(Houston_Min) - 1])
+end_minWage <- c(end_minWage, Houston_Min[length(Houston_Min)])
 
 
 # Dallas
@@ -205,7 +205,7 @@ Dallas_Avg_CPI_percent_increase <- mean(Dallas_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, Dallas_Avg_CPI_percent_increase)
 city <- c(city, "Dallas")
 start_minWage <- c(start_minWage, Dallas_Min[1])
-end_minWage <- c(end_minWage, Dallas_Min[length(Dallas_Min) - 1])
+end_minWage <- c(end_minWage, Dallas_Min[length(Dallas_Min)])
 
 
 # Philadelphia
@@ -223,7 +223,7 @@ Philadelphia_Avg_CPI_percent_increase <- mean(Philadelphia_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, Philadelphia_Avg_CPI_percent_increase)
 city <- c(city, "Philadelphia")
 start_minWage <- c(start_minWage, Philadelphia_Min[1])
-end_minWage <- c(end_minWage, Philadelphia_Min[length(Philadelphia_Min) - 1])
+end_minWage <- c(end_minWage, Philadelphia_Min[length(Philadelphia_Min)])
 
 
 # cities that raised from $7.25 but are under $15
@@ -244,12 +244,12 @@ Boston_Avg_CPI_percent_increase <- mean(Boston_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, Boston_Avg_CPI_percent_increase)
 city <- c(city, "Boston")
 start_minWage <- c(start_minWage, Boston_Min[1])
-end_minWage <- c(end_minWage, Boston_Min[length(Boston_Min) - 1])
+end_minWage <- c(end_minWage, Boston_Min[length(Boston_Min)])
 
 
 # Minneapolis only has 2018-present day data
 Minneapolis_CPI <- na.omit(SCOPES_DATA_yearly$MinneapolisCPI)
-Minneapolis_Min <- SCOPES_DATA_yearly$MinneapolisCPI
+Minneapolis_Min <- SCOPES_DATA_yearly$MinneapolisMIN
 
 
 Minneapolis_CPI_percent_increase <- c()
@@ -263,7 +263,7 @@ Minneapolis_Avg_CPI_percent_increase <- mean(Minneapolis_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, Minneapolis_Avg_CPI_percent_increase)
 city <- c(city, "Minneapolis")
 start_minWage <- c(start_minWage, Minneapolis_Min[1])
-end_minWage <- c(end_minWage, Minneapolis_Min[length(Minneapolis_Min) - 1])
+end_minWage <- c(end_minWage, Minneapolis_Min[length(Minneapolis_Min)])
 
 
 
@@ -282,7 +282,7 @@ Denver_Avg_CPI_percent_increase <- mean(Denver_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, Denver_Avg_CPI_percent_increase)
 city <- c(city, "Denver")
 start_minWage <- c(start_minWage, Denver_Min[1])
-end_minWage <- c(end_minWage, Denver_Min[length(Denver_Min) - 1])
+end_minWage <- c(end_minWage, Denver_Min[length(Denver_Min)])
 
 
 # Phoenix only has 2018-present day data
@@ -300,7 +300,7 @@ Phoenix_Avg_CPI_percent_increase <- mean(Phoenix_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, Phoenix_Avg_CPI_percent_increase)
 city <- c(city, "Phoenix")
 start_minWage <- c(start_minWage, Phoenix_Min[1])
-end_minWage <- c(end_minWage, Phoenix_Min[length(Phoenix_Min) - 1])
+end_minWage <- c(end_minWage, Phoenix_Min[length(Phoenix_Min)])
 
 
 # Honolulu only has 2018-present day data
@@ -319,7 +319,7 @@ Honolulu_Avg_CPI_percent_increase <- mean(Honolulu_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, Honolulu_Avg_CPI_percent_increase)
 city <- c(city, "Honolulu")
 start_minWage <- c(start_minWage, honolulu_Min[1])
-end_minWage <- c(end_minWage, honolulu_Min[length(honolulu_Min) - 1])
+end_minWage <- c(end_minWage, honolulu_Min[length(honolulu_Min)])
 
 
 # San Diego only has 2018-present day data
@@ -338,7 +338,7 @@ SanDiego_Avg_CPI_percent_increase <- mean(SanDiego_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, SanDiego_Avg_CPI_percent_increase)
 city <- c(city, "San Diego")
 start_minWage <- c(start_minWage,  SanDiego_Min[1])
-end_minWage <- c(end_minWage, SanDiego_Min[length(SanDiego_Min) - 1])
+end_minWage <- c(end_minWage, SanDiego_Min[length(SanDiego_Min)])
 
 # cities that eventually went $15 or above
 
@@ -358,7 +358,7 @@ Seattle_Avg_CPI_percent_increase <- mean(Seattle_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, Seattle_Avg_CPI_percent_increase)
 city <- c(city, "Seattle")
 start_minWage <- c(start_minWage,  Seattle_Min[1])
-end_minWage <- c(end_minWage, Seattle_Min[length(Seattle_Min) - 1])
+end_minWage <- c(end_minWage, Seattle_Min[length(Seattle_Min)])
 
 
 # San Francisco
@@ -376,7 +376,7 @@ SanFrancisco_Avg_CPI_percent_increase <- mean(SanFrancisco_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, SanFrancisco_Avg_CPI_percent_increase)
 city <- c(city, "San Francisco")
 start_minWage <- c(start_minWage,  sanFrancisco_Min[1])
-end_minWage <- c(end_minWage, sanFrancisco_Min[length(sanFrancisco_Min) - 1])
+end_minWage <- c(end_minWage, sanFrancisco_Min[length(sanFrancisco_Min)])
 
 
 # New York City
@@ -394,7 +394,7 @@ NYC_Avg_CPI_percent_increase <- mean(NYC_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, NYC_Avg_CPI_percent_increase)
 city <- c(city, "NYC")
 start_minWage <- c(start_minWage,  NYC_Min[1])
-end_minWage <- c(end_minWage, NYC_Min[length(NYC_Min) - 1])
+end_minWage <- c(end_minWage, NYC_Min[length(NYC_Min)])
 
 
 # Los Angeles
@@ -412,7 +412,7 @@ LA_Avg_CPI_percent_increase <- mean(LA_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, LA_Avg_CPI_percent_increase)
 city <- c(city, "LA")
 start_minWage <- c(start_minWage,  LA_Min[1])
-end_minWage <- c(end_minWage, LA_Min[length(LA_Min) - 1])
+end_minWage <- c(end_minWage, LA_Min[length(LA_Min)])
 
 
 # Washington DC 
@@ -421,7 +421,7 @@ WADC_Min <- SCOPES_DATA_yearly$WADCMIN
 
 WADC_CPI_percent_increase <- c()
 
-for (i in 1:(length(LA_CPI) - 1)) {
+for (i in 1:(length(WADC_CPI) - 1)) {
   WADC_CPI_percent_increase[i] <- ((WADC_CPI[i + 1] - WADC_CPI[i]) / abs(WADC_CPI[i])) * 100.0
 }
 
@@ -430,10 +430,26 @@ WADC_Avg_CPI_percent_increase <- mean(WADC_CPI_percent_increase)
 AvgCPI <- c(AvgCPI, WADC_Avg_CPI_percent_increase)
 city <- c(city, "Washington DC")
 start_minWage <- c(start_minWage,  WADC_Min[1])
-end_minWage <- c(end_minWage, WADC_Min[length(WADC_Min) - 1])
+end_minWage <- c(end_minWage, WADC_Min[length(WADC_Min)])
 
 AvgCPI_increase_df <- data.frame(cityName=city, AverageCPI=AvgCPI, StartMin=start_minWage, EndMin=end_minWage)
 
-ggplot(data=AvgCPI_increase_df, aes(x=cityName, y=AverageCPI)) +
-  geom_bar(stat="identity")
+
+AvgCPI_increase_df <- AvgCPI_increase_df[order(AvgCPI_increase_df$AverageCPI),]
+
+row.names(AvgCPI_increase_df) <- NULL
+
+AvgCPI_increase_df <- AvgCPI_increase_df %>%
+  mutate (EndMin = as.double(EndMin),
+          minWageScale = cut(x=EndMin, 
+                         breaks = c(-Inf, 7.50, 14.99, Inf),
+                         labels = c("Stayed", "Increased", "Increased 15 or above"),
+                         right = TRUE)
+  )
+
+ggplot(data=AvgCPI_increase_df, mapping=aes(x=reorder(cityName, AverageCPI), y=AverageCPI, fill=minWageScale)) + 
+    geom_col()
+
+
+
        

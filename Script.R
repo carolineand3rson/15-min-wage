@@ -114,12 +114,12 @@ Seattle_CPI <- SCOPES_DATA$SeattleCPI
 NY_CPI <- SCOPES_DATA$NYCCPI
 WashDC_CPI <- SCOPES_DATA$WADCCPI
 
-Avg_CPI <- c()
+Avg_CPI_above15 <- c()
 
 
 for (i in 1:length(SanFrancisco_CPI)) {
   CPI_row_mean <- mean(c(SanFrancisco_CPI[i], LA_CPI[i], Seattle_CPI[i], NY_CPI[i], WashDC_CPI[i]))
-  Avg_CPI[i] <- CPI_row_mean
+  Avg_CPI_above15[i] <- CPI_row_mean
 }
 
 SanFrancisco_Min <- SCOPES_DATA$SanFranciscoMIN
@@ -128,14 +128,14 @@ Seattle_Min <- SCOPES_DATA$SeattleMIN
 NY_Min <- SCOPES_DATA$NYCMIN
 WashDC_Min <- SCOPES_DATA$WADCMIN
 
-Avg_Min <- c()
+Avg_Min_Above15 <- c()
 
 for (i in 1:length(SanFrancisco_Min)) {
   Min_row_mean <- mean(c(SanFrancisco_Min[i], LA_Min[i], Seattle_Min[i], NY_Min[i], WashDC_Min[i]))
-  Avg_Min[i] <- Min_row_mean
+  Avg_MIN_Above15[i] <- Min_row_mean
 }
 
-Avg_CPI_and_Min_lm <- lm(Avg_CPI ~ Avg_Min)
+Avg_CPI_and_Min_lm <- lm(Avg_MIN_Above15 ~ Avg_Min)
 summary(Avg_CPI_and_Min_lm)
 plot(Avg_CPI_and_Min_lm)
 
@@ -432,6 +432,23 @@ city <- c(city, "Washington DC")
 start_minWage <- c(start_minWage,  WADC_Min[1])
 end_minWage <- c(end_minWage, WADC_Min[length(WADC_Min)])
 
+# Chicago 
+Chicago_CPI <- SCOPES_DATA_yearly$ChicagoCPI
+Chicago_Min <- SCOPES_DATA_yearly$ChicagoMIN
+
+Chicago_CPI_percent_increase <- c()
+
+for (i in 1:(length(Chicago_CPI) - 1)) {
+  Chicago_CPI_percent_increase[i] <- ((Chicago_CPI[i + 1] - Chicago_CPI[i]) / abs(Chicago_CPI[i])) * 100.0
+}
+
+Chicago_Avg_CPI_percent_increase <- mean(Chicago_CPI_percent_increase)
+
+AvgCPI <- c(AvgCPI, Chicago_Avg_CPI_percent_increase)
+city <- c(city, "Chicago")
+start_minWage <- c(start_minWage,  Chicago_Min[1])
+end_minWage <- c(end_minWage, Chicago_Min[length(Chicago_Min)])
+
 AvgCPI_increase_df <- data.frame(cityName=city, AverageCPI=AvgCPI, StartMin=start_minWage, EndMin=end_minWage)
 
 
@@ -451,5 +468,54 @@ ggplot(data=AvgCPI_increase_df, mapping=aes(x=reorder(cityName, AverageCPI), y=A
     geom_col()
 
 
+# Averaging all cities CPI that stayed at $7.25 min wage
+Houston_Min <- SCOPES_DATA$HoustonCPI
+Dallas_Min <- SCOPES_DATA$DallasCPI
+Philadelphia_Min <- SCOPES_DATA$PhiladelphiaCPI
+Atlanta_Min <- SCOPES_DATA$AtlantaCPI
 
-       
+Avg_Min_Stayed <- c()
+
+for (i in 1:length(Houston_Min)) {
+  Min_row_mean <- mean(c(Houston_Min[i], Dallas_Min[i], Philadelphia_Min[i], Atlanta_Min[i]))
+  Avg_Min_Stayed[i] <- Min_row_mean
+}
+
+# Averaging all cities CPI that have above $15 min wage
+SanFrancisco_CPI <- SCOPES_DATA$SanFranciscoCPI
+LA_CPI <- SCOPES_DATA$LACPI
+Seattle_CPI <- SCOPES_DATA$SeattleCPI
+NY_CPI <- SCOPES_DATA$NYCCPI
+WashDC_CPI <- SCOPES_DATA$WADCCPI
+Chicago_CPI <- SCOPES_DATA$ChicagoCPI
+
+Avg_CPI_above15 <- c()
+
+
+for (i in 1:length(SanFrancisco_CPI)) {
+  CPI_row_mean <- mean(c(SanFrancisco_CPI[i], LA_CPI[i], Seattle_CPI[i], NY_CPI[i], WashDC_CPI[i], Chicago_CPI[i]))
+  Avg_CPI_above15[i] <- CPI_row_mean
+}
+
+# Averaging all cities above 7.25 but under 15
+Denver_CPI <- SCOPES_DATA$DenverCPI
+Minneapolis_CPI <- SCOPES_DATA$MinneapolisCPI
+SanDiego_CPI <- SCOPES_DATA$SanDiegoCPI
+Phoenix_CPI <- SCOPES_DATA$PhoenixCPI
+Honolulu_CPI <- SCOPES_DATA$HonoluluCPI
+Boston_CPI <- SCOPES_DATA$BostonCPI
+
+Avg_Increased_under15 <- c()
+
+for (i in 1:length(Denver_CPI)) {
+  CPI_row_mean <- mean(c(Denver_CPI[i], Minneapolis_CPI[i], SanDiego_CPI[i], Phoenix_CPI[i], Honolulu_CPI[i], Boston_CPI[i]))
+  Avg_Increased_under15[i] <- CPI_row_mean
+}
+
+
+# Average CPI increase over time
+plot(SCOPES_DATA$'Time', SCOPES_DATA$'SeattleCPI', ylim = c(200, 325), col="white", xlab = "Time", ylab = "CPI", main = "Major Cities CPI data over Time")
+legend(x="topleft", legend=c("15OrAbove", "Stayed", "Increased"), col = c("red", "blue", "green"), lwd = 2)
+lines(SCOPES_DATA$Time, Avg_CPI_above15, lwd=2.0, col="red")
+lines(SCOPES_DATA$Time, Avg_Min_Stayed, lwd=2.0, col="blue")
+lines(SCOPES_DATA$Time, Avg_Increased_under15, lwd=2.0, col="green")

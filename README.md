@@ -8,4 +8,4 @@ The standard of living is defined by the unemployment rate, food cost, and cost 
 
 The goal of this project is to have a presentable r shiny application which does linear regression analysis and residual analysis of major cities which will include both cities that have raised the minimum wage and those that have not.
 
-THis project looks to see if raising the minimum wage does in fact raise the standard of living in American cities. 
+This project looks to see if raising the minimum wage does in fact raise the standard of living in American cities. 
